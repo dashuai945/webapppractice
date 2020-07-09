@@ -11,6 +11,6 @@ public interface UserMapper {
     void adduser(User user);
     @Select("select * from user where username=#{username}")
     User getuser(String username);
-
-
+    @Select("select * from user where username=#{username} and password=#{password}")
+    User login(String username,String password);
 }

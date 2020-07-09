@@ -18,6 +18,9 @@ public class registerController {
     @Autowired
     private UserMapper userMapper;
     @GetMapping("/register")
+    public String reg(){
+        return "register";
+    }
     @RequestMapping("/register")
     public String register(HttpServletRequest request, Map<String,Object> map) {
 
@@ -37,7 +40,7 @@ public class registerController {
         } else {
            userMapper.adduser(user);
            map.put("mag",user);
-           return "register";
+           return "login";
         }
     }
     @RequestMapping("/getuser")
@@ -53,7 +56,15 @@ public class registerController {
 
         }
     }
-
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request, Map<String,Object> map){
+        String username = request.getParameter( "username");
+        String password = request.getParameter( "password");
+        User loginuser = userMapper.login(username, password);
+        System.out.println(loginuser);
+        map.put("msg2","the user  "+loginuser+"login");
+        return "login";
+    }
 
 
 }
