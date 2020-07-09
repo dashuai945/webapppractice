@@ -19,7 +19,7 @@ public class registerController {
     private UserMapper userMapper;
     @GetMapping("/register")
     @RequestMapping("/register")
-    public String register(HttpServletRequest request, Map<String,Object> map ){
+    public String register(HttpServletRequest request, Map<String,Object> map) {
 
         String username = request.getParameter( "username");
         String password = request.getParameter( "password");
@@ -29,12 +29,31 @@ public class registerController {
         User user=new User();
         user.setUsername(username);
         user.setPassword(password);
-        userMapper.adduser(user);
-        map.put("mag",user);
 
-
-
-        return "register";
-
+        User user1 = userMapper.getuser(username);
+        if (user1!=null) {
+            map.put("msg1", "the user has been used,pls register again");
+            return "register";
+        } else {
+           userMapper.adduser(user);
+           map.put("mag",user);
+           return "register";
+        }
     }
+    @RequestMapping("/getuser")
+    public  String getuser(HttpServletRequest request, Map<String,Object> map) {
+        String username = request.getParameter("username");
+        User user = userMapper.getuser(username);
+        if (user != null) {
+            map.put("msg", "the user has been registered!");
+            return "register";
+        } else {
+            map.put("msg", "the user has not been used");
+            return "register";
+
+        }
+    }
+
+
+
 }
