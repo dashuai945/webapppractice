@@ -15,4 +15,8 @@ public interface UserMapper {
     void deleteuser(String username);
     @Update("update user set password=#{password} where username=#{username}")
     void updateuser(String username,String password);
+    @Select("select * from user where username=#{username} and password=#{password}")
+    User getuser1(String username,String password);
+
+
 }

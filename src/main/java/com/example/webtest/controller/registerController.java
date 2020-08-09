@@ -62,7 +62,7 @@ public class registerController {
         String password = request.getParameter( "password");
         User loginuser = userMapper.login(username, password);
         System.out.println(loginuser);
-        map.put("msg2","the user  "+loginuser+"login");
+        map.put("msg2","the user  "+loginuser+" login");
         return "login";
     }
     @RequestMapping("/deleteuser")
@@ -79,22 +79,60 @@ public class registerController {
         }
     }
 
-    @RequestMapping("/updateuser")
-    public String update(HttpServletRequest request, Map<String,Object> map){
-        String username = request.getParameter( "username");
-        String password = request.getParameter( "password");
-        User getuser = userMapper.getuser(username);
-        if (getuser!=null) {
-            userMapper.updateuser(username,password);
-            map.put("msg4", "the user has been updated!");
+    @RequestMapping("/Update")
+    public String Update(HttpServletRequest request, Map<String,Object> map) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String newpassword = request.getParameter("newpassword");
+        User getuser = userMapper.getuser1(username, password);
+        if (getuser != null) {
+            userMapper.updateuser(username,newpassword);
+            map.put("msg3", "the user has been updated!");
             return "login";
         } else {
-            map.put("msg4","the user is not a legal user");
+            map.put("msg3", "the user is not a legal user");
             return "login";
         }
-
-
     }
+    @RequestMapping("/main_tab")
+    public String main_tab(HttpServletRequest request, Map<String,Object> map) {
+        return "main_tab";
+    }
+    @RequestMapping("/Tree")
+    public String Tree(HttpServletRequest request, Map<String,Object> map) {
+        return "Tree";
+    }
+
+    @RequestMapping("/Map")
+    public String Map(HttpServletRequest request, Map<String,Object> map) {
+        return "Map";
+    }
+    @RequestMapping("/Linear_table")
+    public String Linear_table(HttpServletRequest request, Map<String,Object> map) {
+        return "Linear_table";
+    }
+    @RequestMapping("/Array")
+    public String Array(HttpServletRequest request, Map<String,Object> map) {
+        return "Array";
+    }
+    @RequestMapping("/Linked_list")
+    public String Linked_list(HttpServletRequest request, Map<String,Object> map) {
+        return "Linked_list";
+    }
+    @RequestMapping("/Queue")
+    public String Queue(HttpServletRequest request, Map<String,Object> map) {
+        return "Queue";
+    }
+    @RequestMapping("/Stack")
+    public String Stack(HttpServletRequest request, Map<String,Object> map) {
+        return "Stack";
+    }
+    @RequestMapping("/Other")
+    public String Other(HttpServletRequest request, Map<String,Object> map) {
+        return "Other";
+    }
+
+
 
 
 

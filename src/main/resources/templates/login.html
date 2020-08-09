@@ -5,40 +5,73 @@
     <title>登陆页面</title>
 </head>
 <body>
-<h2>登陆页面<h2>
+<h2 style="text-align: center;">登陆页面<h2>
+<li style="display: inline-block; font-size: 0.8em;"><a href="//localhost:8081/main_tab/">返回首页</a></li>
 <div>
-    <form action="/login" method="post">
+    <form action="/login" method="post" style="text-indent:29em;">
         <label for="">用户名</label>
         <input type="text" name="username" placeholder="用户名">
         <label for="">密码</label>
         <input type="password" name="password" placeholder="密码">
         <input type="submit" value="登陆">
     </form>
-    <h2 th:utext="${msg2}"></h2>
+    <h3 th:utext="${msg2}"></h3>
+
+</div>
+
+<div>
+    <form action="/Update" method="post" style="text-indent:29em;">
+        <label for="">用户名</label>
+        <input type="text" name="username" placeholder="用户名">
+        <label for="">密码</label>
+        <input type="password" name="password" placeholder="密码">
+        <label for="">新密码</label>
+        <input type="password" name="newpassword" placeholder="新密码">
+        <input type="submit" value="更改密码">
+    </form>
+    <h3 th:utext="${msg4}"></h3>
 
 </div>
 <div>
-    <form action="/deleteuser" method="post">
+    <form action="/deleteuser" method="post" style="text-indent:29em;">
         <label for="">用户名</label>
         <input type="text" name="username" placeholder="用户名">
 
         <input type="submit" value="删除用户">
     </form>
-    <h2 th:utext="${msg3}"></h2>
+    <h3 th:utext="${msg3}"></h3>
 
 
 </div>
-<div>
-    <form action="/updateuser" method="post">
-        <label for="">用户名</label>
-        <input type="text" name="username" placeholder="用户名">
-        <label for="">密码</label>
-        <input type="password" name="password" placeholder="密码">
-        <input type="submit" value="更改密码">
-    </form>
-    <h2 th:utext="${msg4}"></h2>
 
-</div>
+
+
+<style>
+   div{
+       font-size: 0.65em;
+       font-style:normal;
+       font-weight:400;
+       color:#474747;
+       font-variant-ligatures: normal;
+       font-variant-caps: normal;
+       font-variant-numeric: normal;
+       font-variant-east-asian: normal;
+       font-stretch: normal;
+       line-height: normal;
+       font-family: Arial;
+
+   }
+   h3{
+       text-align: center;
+       font-size: 1.0em;
+       font-style:normal;
+       font-weight:400;
+       color:#474747;
+       font-family: Arial;
+   }
+</style>
+
+
 
 
 </body>
