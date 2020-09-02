@@ -6,27 +6,28 @@
 </head>
 <body>
 <h2>欢迎进入注册页面</h2>
-<li style="display: inline-block; font-size: 0.8em;"><a href="//localhost:8081/main_tab/">返回首页</a></li>
+<!--<li style="display: inline-block; font-size: 0.8em;"><a href="//localhost:8081/main_tab/">返回首页</a></li>-->
+<li style="font-size: 0.8em; display:inline-block;"><a href="//localhost:8081/login/">登陆</a></li>
 <div>
     <form action="/register" method="post">
-        <label for="">用户名</label>
+        <label for="">用户名: </label>
         <input type="text" name="username" placeholder="用户名">
-        <label for="">密码</label>
+        <label for="">密码: </label>
         <input type="password" name="password" placeholder="密码">
         <input type="submit" value="注册">
     </form>
-    <h3 th:utext="${msg1}"></h3>
+    <h3 th:utext="${msg}"></h3>
 
 </div>
 
 <div>
     <form action="/getuser" method="post">
-        <label for="">用户名</label>
+        <label for="">用户名: </label>
         <input type="text" name="username" placeholder="用户名">
 
         <input type="submit" value="查找用户">
     </form>
-    <h3 th:utext="${msg}"></h3>
+    <h3 th:utext="${msg1}"></h3>
 
 
 </div>

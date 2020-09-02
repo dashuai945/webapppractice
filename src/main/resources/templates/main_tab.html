@@ -9,6 +9,58 @@
 <li style="font-size: 0.8em; display:inline-block;"><a href="//localhost:8081/register/">注册</a></li>
 <li style="font-size: 0.8em; display:inline-block;"><a href="//localhost:8081/login/">登陆</a></li>
 <li style="font-size: 0.8em; display:inline-block;" th:utext="${msg2}" ></li>
+<div class="manager" >
+    <div>
+        <form action="/register" method="post" style="text-indent:29em;">
+            <label for="">标题: </label>
+            <input type="text" name="head" placeholder="标题">
+            <label for="">内容: </label>
+            <input type="data" name="data" placeholder="内容">
+            <input type="submit" value="添加">
+        </form>
+        <h3 th:utext="${msg7}"></h3>
+
+    </div>
+    <div>
+        <form action="/deleteuser" method="post" style="text-indent:29em;">
+            <label for="">标题: </label>
+            <input type="text" name="head" placeholder="标题">
+
+            <input type="submit" value="删除标题">
+        </form>
+        <h3 th:utext="${msg8}"></h3>
+    </div>
+
+    <div>
+        <form action="/Update" method="post" style="text-indent:29em;">
+            <label for="">标题: </label>
+            <input type="text" name="head" placeholder="标题">
+<!--            <label for="">内容: </label>-->
+<!--            <input type="data" name="data" placeholder="内容">-->
+            <label for="">新内容: </label>
+            <input type="data" name="newdata" placeholder="新内容">
+            <input type="submit" value="更改内容">
+        </form>
+        <h3 th:utext="${msg9}"></h3>
+
+    </div>
+
+    <div>
+        <form action="/getuser" method="post" style="text-indent:29em;">
+            <label for="">标题: </label>
+            <input type="text" name="head" placeholder="标题">
+
+            <input type="submit" value="查找标题">
+        </form>
+        <h3 th:utext="${msg10}"></h3>
+
+
+    </div>
+
+</div>
+    
+    
+    
 <div class="container navigation">
     <form action="/main_tab" method="post">
     </form>
@@ -25,6 +77,16 @@
     </ul>
 </div>
 
+
+
+
+
+
+
+
+
+
+
 </body>
 
 <style>
@@ -36,6 +98,21 @@
        /*text-align: center;*/
        /*display: flex;*/
        /*justify-content: center;*/
+   }
+
+   .manager div{
+       font-size: 0.65em;
+       font-style:normal;
+       font-weight:400;
+       color:#474747;
+       font-variant-ligatures: normal;
+       font-variant-caps: normal;
+       font-variant-numeric: normal;
+       font-variant-east-asian: normal;
+       font-stretch: normal;
+       line-height: normal;
+       font-family: Arial;
+
    }
     /*h2{*/
     /*    display: flex;*/

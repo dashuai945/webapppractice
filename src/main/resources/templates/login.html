@@ -6,12 +6,13 @@
 </head>
 <body>
 <h2 style="text-align: center;">登陆页面<h2>
-<li style="display: inline-block; font-size: 0.8em;"><a href="//localhost:8081/main_tab/">返回首页</a></li>
+<!--<li style="display: inline-block; font-size: 0.8em;"><a href="//localhost:8081/main_tab/">返回首页</a></li>-->
+<li style="font-size: 0.8em; display:inline-block;"><a href="//localhost:8081/register/">注册</a></li>
 <div>
     <form action="/login" method="post" style="text-indent:29em;">
-        <label for="">用户名</label>
+        <label for="">用户名: </label>
         <input type="text" name="username" placeholder="用户名">
-        <label for="">密码</label>
+        <label for="">密码: </label>
         <input type="password" name="password" placeholder="密码">
         <input type="submit" value="登陆">
     </form>
@@ -21,11 +22,11 @@
 
 <div>
     <form action="/Update" method="post" style="text-indent:29em;">
-        <label for="">用户名</label>
+        <label for="">用户名: </label>
         <input type="text" name="username" placeholder="用户名">
-        <label for="">密码</label>
+        <label for="">密码: </label>
         <input type="password" name="password" placeholder="密码">
-        <label for="">新密码</label>
+        <label for="">新密码: </label>
         <input type="password" name="newpassword" placeholder="新密码">
         <input type="submit" value="更改密码">
     </form>
@@ -34,7 +35,7 @@
 </div>
 <div>
     <form action="/deleteuser" method="post" style="text-indent:29em;">
-        <label for="">用户名</label>
+        <label for="">用户名: </label>
         <input type="text" name="username" placeholder="用户名">
 
         <input type="submit" value="删除用户">
