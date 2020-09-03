@@ -6,6 +6,7 @@ import lombok.Data;
 public class Datas {
     private String head;
     private String data;
+    private String title;
     private Integer id;
 
 
@@ -17,6 +18,13 @@ public class Datas {
          this.id = id;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
 
     public void setHead(String head) {
         this.head = head;
@@ -32,6 +40,12 @@ public class Datas {
     public String getData() {
         return this.data;
     }
+
+
+
+
+
+
 
 
 

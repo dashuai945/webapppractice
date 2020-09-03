@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -142,89 +143,446 @@ public class registerController {
     }
 
 
+    @RequestMapping("/Tree")
+    public String Tree(Model model,HttpServletRequest request, Map<String,Object> map) {
+        String headvalue  = null;
+        String datavalue  = null;
+        String titlevalue = null;
+        List<String> alltitle = dataMapper.getalltitle();
+        List<String> allhead = dataMapper.getallhead();
+        List<String> alldata = dataMapper.getalldata();
+        int size =  alltitle.size();
+        String[] Display_Data = new String[size];
+        String[] Display_Head = new String[size];
+        String[] Display_Title = new String[size];
+//        int idvalue = 1;
+        int tmp = 1;
+        Map<String, Datas> allMembers = new HashMap<String, Datas>();
+        for (int x = 1;x <= size; x = x +1) {
+            titlevalue = alltitle.get(x-1);
+            headvalue = allhead.get(x-1);
+            datavalue = alldata.get(x-1);
+//            headvalue = dataMapper.gethead(idvalue);
+//            datavalue = dataMapper.getdatas(idvalue);
+//            titlevalue = dataMapper.gettitle(idvalue);
+            if (titlevalue.equals("树")) {
+                Display_Data[tmp] = datavalue;
+                Display_Head[tmp] = headvalue;
+                Display_Title[tmp] = titlevalue;
+//                System.out.println(titlevalue);
+//                idvalue++;
+                tmp++;
 
-@RequestMapping("/Tree")
-public String Tree(Model model,HttpServletRequest request, Map<String,Object> map) {
-    String headvalue = null;
-    String datavalue = null;
-    int size = 10;
-    String[] Display_Data = new String[size];
-    String[] Display_Head = new String[size];
-    String[] msg = new String[size];
-    String[] mag = new String[size];
-    int idvalue = 1;
-    Datas datas0 = dataMapper.getid(idvalue);
-    Map<String,Datas> allMembers = new HashMap<String,Datas>();
-    while (datas0 != null) {
-        headvalue = dataMapper.gethead(idvalue);
-        datavalue = dataMapper.getdatas(idvalue);
-        Display_Data[idvalue] = datavalue;
-        Display_Head[idvalue] = headvalue;
-//                map.put("msg22", headvalue + "1");
-//                map.put("msg23", datavalue + "2");
-//                System.out.println(idvalue);
-//                System.out.println(headvalue);
-//                System.out.println(datavalue);
-//                System.out.println(datas0);
-//              System.out.println(size);
-//            System.out.println(Display_Head[idvalue]);
-//            System.out.println(Display_Data[idvalue]);
+            } else {
+//                idvalue++;
+                continue;
+            }
 
-//            map.put("msg22", Display_Head[idvalue]);
-//            map.put("msg23", Display_Data[idvalue]);
-//            map.put("msg23", headvalue +  datavalue);
-        idvalue++;
-        size++;
-        datas0 = dataMapper.getid(idvalue);
-    }
-    for (int x = 1;x < idvalue; x = x +1) {
-        Datas vo = new Datas();
-        vo.setId(x);
-        vo.setHead(Display_Head[x]);
-        vo.setData(Display_Data[x]);
+        }
+
+//        while (datas0 != null) {
+//            headvalue = dataMapper.gethead(idvalue);
+//            datavalue = dataMapper.getdatas(idvalue);
+//            titlevalue = dataMapper.gettitle(idvalue);
+//
+////        System.out.println(titlevalue);
+//            if (titlevalue.equals("表")){
+//                Display_Data[tmp] = datavalue;
+//                Display_Head[tmp] = headvalue;
+//                Display_Title[tmp] = titlevalue;
+////                System.out.println(titlevalue);
+////                map.put("msg22", headvalue + "1");
+////                map.put("msg23", datavalue + "2");
+////                System.out.println(idvalue);
+////                System.out.println(headvalue);
+////                System.out.println(datavalue);
+////                System.out.println(datas0);
+////              System.out.println(size);
+////            System.out.println(Display_Head[idvalue]);
+////            System.out.println(Display_Data[idvalue]);
+//
+////            map.put("msg22", Display_Head[idvalue]);
+////            map.put("msg23", Display_Data[idvalue]);
+////            map.put("msg23", headvalue +  datavalue);
+//                idvalue++;
+//                size++;
+//                tmp++;
+//                datas0 = dataMapper.getid(idvalue);
+//
+//            }
+//            else {
+//                idvalue++;
+//                datas0 = dataMapper.getid(idvalue);
+//                continue;
+//            }
+//
+//        }
+        for (int x = 1;x < tmp; x = x +1) {
+            Datas vo = new Datas();
+            vo.setId(x);
+            vo.setTitle(Display_Title[x]);
+            vo.setHead(Display_Head[x]);
+            vo.setData(Display_Data[x]);
 //        map.put("msg[x]", Display_Head[x]);
 //        map.put("mag[x]", Display_Data[x]);
-        allMembers.put("index-" + x, vo);
+            allMembers.put("index-" + x, vo);
 //        System.out.println(x);
-//        System.out.println(allMembers.put("mldn-" + x, vo));
+//        System.out.println(allMembers.put("index-" + x, vo));
 
-    }
-    model.addAttribute("allDatas",allMembers);
+        }
+        map.put("msg_tree",Display_Title[tmp-1]);
+        model.addAttribute("allDatas", allMembers);
 //    System.out.println(model.addAttribute("allDatas",allMembers));
-
-    return "Tree";
-}
-    @RequestMapping("/Map")
-    public String Map(HttpServletRequest request, Map<String,Object> map) {
-        return "Map";
+        return "main_tab";
     }
-    @RequestMapping("/Linear_table")
-    public String Linear_table(HttpServletRequest request, Map<String,Object> map) {
-        return "Linear_table";
+
+
+    @RequestMapping("/Map")
+    public String Map(Model model,HttpServletRequest request, Map<String,Object> map) {
+        String headvalue  = null;
+        String datavalue  = null;
+        String titlevalue = null;
+        List<String> alltitle = dataMapper.getalltitle();
+        List<String> allhead = dataMapper.getallhead();
+        List<String> alldata = dataMapper.getalldata();
+        int size =  alltitle.size();
+        String[] Display_Data = new String[size];
+        String[] Display_Head = new String[size];
+        String[] Display_Title = new String[size];
+        int idvalue = 1;
+        int tmp = 1;
+        Map<String, Datas> allMembers = new HashMap<String, Datas>();
+        for (int x = 1;x <= size; x = x +1) {
+            titlevalue = alltitle.get(x-1);
+            headvalue = allhead.get(x-1);
+            datavalue = alldata.get(x-1);
+//            headvalue = dataMapper.gethead(idvalue);
+//            datavalue = dataMapper.getdatas(idvalue);
+//            titlevalue = dataMapper.gettitle(idvalue);
+            if (titlevalue.equals("图")) {
+                Display_Data[tmp] = datavalue;
+                Display_Head[tmp] = headvalue;
+                Display_Title[tmp] = titlevalue;
+//                System.out.println(titlevalue);
+                idvalue++;
+                tmp++;
+
+            } else {
+                idvalue++;
+                continue;
+            }
+
+        }
+        for (int x = 1; x < tmp; x = x + 1) {
+            Datas vo = new Datas();
+            vo.setId(x);
+            vo.setTitle(Display_Title[x]);
+            vo.setHead(Display_Head[x]);
+            vo.setData(Display_Data[x]);
+            allMembers.put("index-" + x, vo);
+        }
+        map.put("msg_map",Display_Title[tmp-1]);
+        model.addAttribute("allDatas", allMembers);
+//        System.out.println(model.addAttribute("title_main", title_main));
+        return "main_tab";
+    }
+
+
+
+        @RequestMapping("/Linear_table")
+    public String Linear_table(Model model,HttpServletRequest request, Map<String,Object> map) {
+            String headvalue  = null;
+            String datavalue  = null;
+            String titlevalue = null;
+            List<String> alltitle = dataMapper.getalltitle();
+        List<String> allhead = dataMapper.getallhead();
+        List<String> alldata = dataMapper.getalldata();
+            int size =  alltitle.size();
+            String[] Display_Data = new String[size];
+            String[] Display_Head = new String[size];
+            String[] Display_Title = new String[size];
+            int idvalue = 1;
+            int tmp = 1;
+            Map<String, Datas> allMembers = new HashMap<String, Datas>();
+            for (int x = 1;x <= size; x = x +1) {
+            titlevalue = alltitle.get(x-1);
+            headvalue = allhead.get(x-1);
+            datavalue = alldata.get(x-1);
+//            headvalue = dataMapper.gethead(idvalue);
+//            datavalue = dataMapper.getdatas(idvalue);
+//            titlevalue = dataMapper.gettitle(idvalue);
+                if (titlevalue.equals("线性表")) {
+                    Display_Data[tmp] = datavalue;
+                    Display_Head[tmp] = headvalue;
+                    Display_Title[tmp] = titlevalue;
+//                System.out.println(titlevalue);
+                    idvalue++;
+                    tmp++;
+
+                } else {
+                    idvalue++;
+                    continue;
+                }
+
+            }
+            for (int x = 1; x < tmp; x = x + 1) {
+                Datas vo = new Datas();
+                vo.setId(x);
+                vo.setTitle(Display_Title[x]);
+                vo.setHead(Display_Head[x]);
+                vo.setData(Display_Data[x]);
+                allMembers.put("index-" + x, vo);
+            }
+            map.put("msg_Linear_table",Display_Title[tmp-1]);
+            model.addAttribute("allDatas", allMembers);
+//        System.out.println(model.addAttribute("title_main", title_main));
+            return "main_tab";
     }
     @RequestMapping("/Array")
-    public String Array(HttpServletRequest request, Map<String,Object> map) {
-        return "Array";
+    public String Array(Model model,HttpServletRequest request, Map<String,Object> map) {
+        String headvalue  = null;
+        String datavalue  = null;
+        String titlevalue = null;
+        List<String> alltitle = dataMapper.getalltitle();
+        List<String> allhead = dataMapper.getallhead();
+        List<String> alldata = dataMapper.getalldata();
+        int size =  alltitle.size();
+        String[] Display_Data = new String[size];
+        String[] Display_Head = new String[size];
+        String[] Display_Title = new String[size];
+        int idvalue = 1;
+        int tmp = 1;
+        Map<String, Datas> allMembers = new HashMap<String, Datas>();
+        for (int x = 1;x <= size; x = x +1) {
+            titlevalue = alltitle.get(x-1);
+            headvalue = allhead.get(x-1);
+            datavalue = alldata.get(x-1);
+//            headvalue = dataMapper.gethead(idvalue);
+//            datavalue = dataMapper.getdatas(idvalue);
+//            titlevalue = dataMapper.gettitle(idvalue);
+            if (titlevalue.equals("数组")) {
+                Display_Data[tmp] = datavalue;
+                Display_Head[tmp] = headvalue;
+                Display_Title[tmp] = titlevalue;
+//                System.out.println(titlevalue);
+                idvalue++;
+                tmp++;
+
+            } else {
+                idvalue++;
+                continue;
+            }
+
+        }
+        for (int x = 1; x < tmp; x = x + 1) {
+            Datas vo = new Datas();
+            vo.setId(x);
+            vo.setTitle(Display_Title[x]);
+            vo.setHead(Display_Head[x]);
+            vo.setData(Display_Data[x]);
+            allMembers.put("index-" + x, vo);
+        }
+        map.put("msg_Array",Display_Title[tmp-1]);
+        model.addAttribute("allDatas", allMembers);
+//        System.out.println(model.addAttribute("title_main", title_main));
+        return "main_tab";
     }
     @RequestMapping("/Linked_list")
-    public String Linked_list(HttpServletRequest request, Map<String,Object> map) {
-        return "Linked_list";
+    public String Linked_list(Model model,HttpServletRequest request, Map<String,Object> map) {
+        String headvalue  = null;
+        String datavalue  = null;
+        String titlevalue = null;
+        List<String> alltitle = dataMapper.getalltitle();
+        List<String> allhead = dataMapper.getallhead();
+        List<String> alldata = dataMapper.getalldata();
+        int size =  alltitle.size();
+        String[] Display_Data = new String[size];
+        String[] Display_Head = new String[size];
+        String[] Display_Title = new String[size];
+        int idvalue = 1;
+        int tmp = 1;
+        Map<String, Datas> allMembers = new HashMap<String, Datas>();
+        for (int x = 1;x <= size; x = x +1) {
+            titlevalue = alltitle.get(x-1);
+            headvalue = allhead.get(x-1);
+            datavalue = alldata.get(x-1);
+//            headvalue = dataMapper.gethead(idvalue);
+//            datavalue = dataMapper.getdatas(idvalue);
+//            titlevalue = dataMapper.gettitle(idvalue);
+            if (titlevalue.equals("链表")) {
+                Display_Data[tmp] = datavalue;
+                Display_Head[tmp] = headvalue;
+                Display_Title[tmp] = titlevalue;
+//                System.out.println(titlevalue);
+                idvalue++;
+                tmp++;
+
+            } else {
+                idvalue++;
+                continue;
+            }
+
+        }
+        for (int x = 1; x < tmp; x = x + 1) {
+            Datas vo = new Datas();
+            vo.setId(x);
+            vo.setTitle(Display_Title[x]);
+            vo.setHead(Display_Head[x]);
+            vo.setData(Display_Data[x]);
+            allMembers.put("index-" + x, vo);
+        }
+        map.put("msg_Linked_list",Display_Title[tmp-1]);
+        model.addAttribute("allDatas", allMembers);
+//        System.out.println(model.addAttribute("title_main", title_main));
+        return "main_tab";
     }
     @RequestMapping("/Queue")
-    public String Queue(HttpServletRequest request, Map<String,Object> map) {
-        return "Queue";
+    public String Queue(Model model,HttpServletRequest request, Map<String,Object> map) {
+        String headvalue  = null;
+        String datavalue  = null;
+        String titlevalue = null;
+        List<String> alltitle = dataMapper.getalltitle();
+        List<String> allhead = dataMapper.getallhead();
+        List<String> alldata = dataMapper.getalldata();
+        int size =  alltitle.size();
+        String[] Display_Data = new String[size];
+        String[] Display_Head = new String[size];
+        String[] Display_Title = new String[size];
+        int idvalue = 1;
+        int tmp = 1;
+        Map<String, Datas> allMembers = new HashMap<String, Datas>();
+        for (int x = 1;x <= size; x = x +1) {
+            titlevalue = alltitle.get(x-1);
+            headvalue = allhead.get(x-1);
+            datavalue = alldata.get(x-1);
+//            headvalue = dataMapper.gethead(idvalue);
+//            datavalue = dataMapper.getdatas(idvalue);
+//            titlevalue = dataMapper.gettitle(idvalue);
+            if (titlevalue.equals("队列")) {
+                Display_Data[tmp] = datavalue;
+                Display_Head[tmp] = headvalue;
+                Display_Title[tmp] = titlevalue;
+//                System.out.println(titlevalue);
+                idvalue++;
+                tmp++;
+
+            } else {
+                idvalue++;
+                continue;
+            }
+
+        }
+        for (int x = 1; x < tmp; x = x + 1) {
+            Datas vo = new Datas();
+            vo.setId(x);
+            vo.setTitle(Display_Title[x]);
+            vo.setHead(Display_Head[x]);
+            vo.setData(Display_Data[x]);
+            allMembers.put("index-" + x, vo);
+        }
+        map.put("msg_Queue",Display_Title[tmp-1]);
+        model.addAttribute("allDatas", allMembers);
+//        System.out.println(model.addAttribute("title_main", title_main));
+        return "main_tab";
     }
     @RequestMapping("/Stack")
-    public String Stack(HttpServletRequest request, Map<String,Object> map) {
-        return "Stack";
+    public String Stack(Model model,HttpServletRequest request, Map<String,Object> map) {
+        String headvalue  = null;
+        String datavalue  = null;
+        String titlevalue = null;
+        List<String> alltitle = dataMapper.getalltitle();
+        List<String> allhead = dataMapper.getallhead();
+        List<String> alldata = dataMapper.getalldata();
+        int size =  alltitle.size();
+        String[] Display_Data = new String[size];
+        String[] Display_Head = new String[size];
+        String[] Display_Title = new String[size];
+        int idvalue = 1;
+        int tmp = 1;
+        Map<String, Datas> allMembers = new HashMap<String, Datas>();
+        for (int x = 1;x <= size; x = x +1) {
+            titlevalue = alltitle.get(x-1);
+            headvalue = allhead.get(x-1);
+            datavalue = alldata.get(x-1);
+//            headvalue = dataMapper.gethead(idvalue);
+//            datavalue = dataMapper.getdatas(idvalue);
+//            titlevalue = dataMapper.gettitle(idvalue);
+            if (titlevalue.equals("栈")) {
+                Display_Data[tmp] = datavalue;
+                Display_Head[tmp] = headvalue;
+                Display_Title[tmp] = titlevalue;
+//                System.out.println(titlevalue);
+                idvalue++;
+                tmp++;
+
+            } else {
+                idvalue++;
+                continue;
+            }
+
+        }
+        for (int x = 1; x < tmp; x = x + 1) {
+            Datas vo = new Datas();
+            vo.setId(x);
+            vo.setTitle(Display_Title[x]);
+            vo.setHead(Display_Head[x]);
+            vo.setData(Display_Data[x]);
+            allMembers.put("index-" + x, vo);
+        }
+        map.put("msg_Stack",Display_Title[tmp-1]);
+        model.addAttribute("allDatas", allMembers);
+//        System.out.println(model.addAttribute("title_main", title_main));
+        return "main_tab";
     }
     @RequestMapping("/Other")
-    public String Other(HttpServletRequest request, Map<String,Object> map) {
-        return "Other";
+    public String Other(Model model,HttpServletRequest request, Map<String,Object> map) {
+        String headvalue  = null;
+        String datavalue  = null;
+        String titlevalue = null;
+        List<String> alltitle = dataMapper.getalltitle();
+        List<String> allhead = dataMapper.getallhead();
+        List<String> alldata = dataMapper.getalldata();
+        int size =  alltitle.size();
+        String[] Display_Data = new String[size];
+        String[] Display_Head = new String[size];
+        String[] Display_Title = new String[size];
+        int idvalue = 1;
+        int tmp = 1;
+        Map<String, Datas> allMembers = new HashMap<String, Datas>();
+        for (int x = 1;x <= size; x = x +1) {
+            titlevalue = alltitle.get(x-1);
+            headvalue = allhead.get(x-1);
+            datavalue = alldata.get(x-1);
+//            headvalue = dataMapper.gethead(idvalue);
+//            datavalue = dataMapper.getdatas(idvalue);
+//            titlevalue = dataMapper.gettitle(idvalue);
+            if (titlevalue.equals("其他")) {
+                Display_Data[tmp] = datavalue;
+                Display_Head[tmp] = headvalue;
+                Display_Title[tmp] = titlevalue;
+//                System.out.println(titlevalue);
+                idvalue++;
+                tmp++;
+
+            } else {
+                idvalue++;
+                continue;
+            }
+
+        }
+        for (int x = 1; x < tmp; x = x + 1) {
+            Datas vo = new Datas();
+            vo.setId(x);
+            vo.setTitle(Display_Title[x]);
+            vo.setHead(Display_Head[x]);
+            vo.setData(Display_Data[x]);
+            allMembers.put("index-" + x, vo);
+        }
+        map.put("msg_Other",Display_Title[tmp-1]);
+        model.addAttribute("allDatas", allMembers);
+//        System.out.println(model.addAttribute("title_main", title_main));
+        return "main_tab";
     }
-
-
-
 
 
 
