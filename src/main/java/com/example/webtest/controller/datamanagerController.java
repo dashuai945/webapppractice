@@ -35,22 +35,22 @@ public class datamanagerController {
         }
     }
 
-    @RequestMapping("/Getdata1")
-    public String Getdata1(HttpServletRequest request, Map<String,Object> map) {
-        String data = request.getParameter("data");
-        String title1 = dataMapper.gettitle1(data);
-        String head1 = dataMapper.gethead1(data);
-
-        if (title1 != null) {
-            map.put("msg12", "the head has been existed!");
-            map.put("msg13", "the "+title1+"'s"+ head1 +"'s contents are "+ data );
-            return "main_tab";
-        } else {
-            map.put("msg12", "the head has not been added");
-            return "main_tab";
-
-        }
-    }
+//    @RequestMapping("/Getdata1")
+//    public String Getdata1(HttpServletRequest request, Map<String,Object> map) {
+//        String data = request.getParameter("data");
+//        String title1 = dataMapper.gettitle1(data);
+//        String head1 = dataMapper.gethead1(data);
+//
+//        if (title1 != null) {
+//            map.put("msg12", "the head has been existed!");
+//            map.put("msg13", "the "+title1+"'s"+ head1 +"'s contents are "+ data );
+//            return "main_tab";
+//        } else {
+//            map.put("msg12", "the head has not been added");
+//            return "main_tab";
+//
+//        }
+//    }
 
 
     @RequestMapping("/Adddata")
