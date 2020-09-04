@@ -17,6 +17,7 @@
 <h2 style="text-align:center">数据结构知识点管理系统<h2>
     <li style="font-size: 0.8em; display:inline-block;"><a href="//localhost:8081/register/">注册</a></li>
     <li style="font-size: 0.8em; display:inline-block;"><a href="//localhost:8081/login/">登陆</a></li>
+    <li style="font-size: 0.8em; display:inline-block;"><a  th:utext="${msg2}"></a></li>
 
     <div class="container navigation">
         <form action="/main_tab" method="post">
@@ -38,6 +39,7 @@
             <form action="/Adddata" method="post" style="text-indent:20em;">
                 <label for="">分类: </label>
                 <input type="text" name="title" placeholder="分类">
+<!--                //th:text属性，这个就是thymeleaf的语法，它表示显示一个普通的文本信息。-->
                 <label for="">标题: </label>
                 <input type="text" name="head" placeholder="标题">
                 <label for="">内容: </label>
@@ -45,7 +47,7 @@
                 <input type="submit" value="添加">
             </form>
             <h3 th:utext="${msg7}"></h3>
-
+<!--            //*th:utext和th:text的区别是：th:text会对<和>进行转义，而th:utext不会转义。*//-->
         </div>
         <div>
             <form action="/Detedata" method="post" style="text-indent:20em;">

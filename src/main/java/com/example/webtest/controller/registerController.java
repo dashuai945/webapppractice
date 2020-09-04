@@ -20,9 +20,8 @@ public class registerController {
     private UserMapper userMapper;
 
     @GetMapping("/register")             //指定路径  //做一种请求映射的，映射输入的地址，8081/register
-    public String reg(){
-        return "register";
-    }
+    public String reg(){return "register";}
+
     @RequestMapping("/register")    //提供路由信息，负责URL到Controller中的具体函数的映射。//该注解和方法一起使用，
     public String register(HttpServletRequest request, Map<String,Object> map) {
              //httpservletrequest request接收前端发起的请求数据，页面到服务器
@@ -40,7 +39,7 @@ public class registerController {
 
         User user1 = userMapper.getuser(username);  //接口映射
         if (user1!=null) {
-            map.put("msg", "the user has been used,pls register again");
+            map.put("msg", "the user " +username+ " has been used, ple select another nameQ!");
             return "register";
         } else {
            userMapper.adduser(user);
@@ -63,16 +62,14 @@ public class registerController {
     }
 
     @GetMapping("/login")             //指定路径
-    public String log(){
-        return "login";
-    }
+    public String log(){return "login";}
 
     @RequestMapping("/login")
     public String login(HttpServletRequest request, Map<String,Object> map){
         String username = request.getParameter( "username");
         String password = request.getParameter( "password");
         User loginuser = userMapper.login(username, password);
-        System.out.println(loginuser);
+//        System.out.println(loginuser);
 //        map.put("msg2","the user  "+loginuser+" login");
         if (loginuser != null) {
             map.put("msg2","the   "+username+" login");
@@ -85,6 +82,8 @@ public class registerController {
 //        map.put("msg1","the   "+loginuser+" login");
 //        return "login";
     }
+
+
     @RequestMapping("/deleteuser")
     public String deleteuser(HttpServletRequest request, Map<String,Object> map) {
         String username = request.getParameter("username");

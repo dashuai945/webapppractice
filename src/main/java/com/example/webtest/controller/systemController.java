@@ -7,6 +7,7 @@ import com.example.webtest.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,8 @@ public class systemController {
 
     @Autowired
     private DataMapper dataMapper;
+
+    @GetMapping("/main_tab")             //指定路径  //做一种请求映射的，映射输入的地址，8081/register
 
     @RequestMapping("/main_tab")
     public String main_tab(HttpServletRequest request, Map<String,Object> map) {
@@ -43,6 +46,7 @@ public class systemController {
 
     @RequestMapping("/Tree")
     public String Tree(Model model, HttpServletRequest request, Map<String,Object> map) {
+        //// 通过model可以实现内容的传递
         String headvalue  = null;
         String datavalue  = null;
         String titlevalue = null;
@@ -133,7 +137,7 @@ public class systemController {
 
         }
         map.put("msg_tree",Display_Title[tmp-1]);
-        model.addAttribute("allDatas", allMembers);
+        model.addAttribute("allDatas", allMembers); //// request属性传递包装
 //    System.out.println(model.addAttribute("allDatas",allMembers));
         return "main_tab";
     }
