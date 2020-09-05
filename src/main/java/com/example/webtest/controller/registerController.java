@@ -65,15 +65,19 @@ public class registerController {
     public String log(){return "login";}
 
     @RequestMapping("/login")
-    public String login(HttpServletRequest request, Map<String,Object> map){
-        String username = request.getParameter( "username");
-        String password = request.getParameter( "password");
+    public String login(HttpServletRequest request, Map<String,Object> map) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         User loginuser = userMapper.login(username, password);
+        User getuser0 = userMapper.getuser(username);
 //        System.out.println(loginuser);
 //        map.put("msg2","the user  "+loginuser+" login");
         if (loginuser != null) {
-            map.put("msg2","the   "+username+" login");
+            map.put("msg2", "the   " + username + " login");
             return "main_tab";
+        } else if (getuser0 != null){
+            map.put("msg2", "the user's password is wrong");
+            return "login";
         } else {
             map.put("msg2","the user is not a legal user");
             return "login";
@@ -87,10 +91,15 @@ public class registerController {
     @RequestMapping("/deleteuser")
     public String deleteuser(HttpServletRequest request, Map<String,Object> map) {
         String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        User user = userMapper.getuser1(username, password);
         User getuser = userMapper.getuser(username);
-        if (getuser != null) {
+        if (user != null) {
             userMapper.deleteuser(username);
             map.put("msg3", "the user has been deleted!");
+            return "login";
+        } else if (getuser != null){
+            map.put("msg3", "the user's password is wrong");
             return "login";
         } else {
             map.put("msg3", "the user is not a legal user");
@@ -103,15 +112,22 @@ public class registerController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String newpassword = request.getParameter("newpassword");
+        User getuser0 = userMapper.getuser(username);
         User getuser = userMapper.getuser1(username, password);
         if (getuser != null) {
             userMapper.updateuser(username,newpassword);
             map.put("msg4", "the user has been updated!");
             return "login";
+        } else if (getuser0 != null){
+            map.put("msg4", "the user's password is wrong");
+            return "login";
         } else {
-            map.put("msg4", "the user is not a legal user");
+            map.put("msg4", "the user is not a legal user! ");
             return "login";
         }
+
+
+
     }
 
 
