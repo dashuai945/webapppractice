@@ -6,7 +6,6 @@ import com.example.webtest.mapper.DataMapper;
 import com.example.webtest.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,9 +17,7 @@ import java.util.Map;
 @Controller
 public class systemController {
 
-    @Autowired      //自动导入依赖的bean 自动导入依赖的bean。byType方式。把配置好的Bean拿来用，完成属性、方法的组装，
-    // 它可以对类成员变量、方法及构造函数进行标注，完成自动装配的工作。
-    //接口实例化；将 usermapper的数据导入进来
+    @Autowired        //接口实例化；将 usermapper的数据导入进来
     private UserMapper userMapper;
 
     @Autowired
@@ -45,8 +42,7 @@ public class systemController {
 
 
     @RequestMapping("/Tree")
-    public String Tree(Model model, HttpServletRequest request, Map<String,Object> map) {
-        //// 通过model可以实现内容的传递
+    public String Tree( HttpServletRequest request, Map<String,Object> map) {
         String headvalue  = null;
         String datavalue  = null;
         String titlevalue = null;
@@ -137,14 +133,14 @@ public class systemController {
 
         }
         map.put("msg_tree",Display_Title[tmp-1]);
-        model.addAttribute("allDatas", allMembers); //// request属性传递包装
-//    System.out.println(model.addAttribute("allDatas",allMembers));
+        map.put("allDatas", allMembers); //// request属性传递包装
+//    System.out.println(map.put("allDatas",allMembers));
         return "main_tab";
     }
 
 
     @RequestMapping("/Map")
-    public String Map(Model model,HttpServletRequest request, Map<String,Object> map) {
+    public String Map(HttpServletRequest request, Map<String,Object> map) {
         String headvalue  = null;
         String datavalue  = null;
         String titlevalue = null;
@@ -188,15 +184,15 @@ public class systemController {
             allMembers.put("index-" + x, vo);
         }
         map.put("msg_map",Display_Title[tmp-1]);
-        model.addAttribute("allDatas", allMembers);//往前台传数据，可以传对象，可以传List，通过el表达式 ${}可以获取到，
-//        System.out.println(model.addAttribute("title_main", title_main));
+        map.put("allDatas", allMembers);//往前台传数据，可以传对象，可以传List，通过el表达式 ${}可以获取到，
+//        System.out.println(map.put("title_main", title_main));
         return "main_tab";
     }
 
 
 
     @RequestMapping("/Linear_table")
-    public String Linear_table(Model model,HttpServletRequest request, Map<String,Object> map) {
+    public String Linear_table(HttpServletRequest request, Map<String,Object> map) {
         String headvalue  = null;
         String datavalue  = null;
         String titlevalue = null;
@@ -240,12 +236,12 @@ public class systemController {
             allMembers.put("index-" + x, vo);
         }
         map.put("msg_Linear_table",Display_Title[tmp-1]);
-        model.addAttribute("allDatas", allMembers);
-//        System.out.println(model.addAttribute("title_main", title_main));
+        map.put("allDatas", allMembers);
+//        System.out.println(map.put("title_main", title_main));
         return "main_tab";
     }
     @RequestMapping("/Array")
-    public String Array(Model model,HttpServletRequest request, Map<String,Object> map) {
+    public String Array(HttpServletRequest request, Map<String,Object> map) {
         String headvalue  = null;
         String datavalue  = null;
         String titlevalue = null;
@@ -289,12 +285,12 @@ public class systemController {
             allMembers.put("index-" + x, vo);
         }
         map.put("msg_Array",Display_Title[tmp-1]);
-        model.addAttribute("allDatas", allMembers);
-//        System.out.println(model.addAttribute("title_main", title_main));
+        map.put("allDatas", allMembers);
+//        System.out.println(map.put("title_main", title_main));
         return "main_tab";
     }
     @RequestMapping("/Linked_list")
-    public String Linked_list(Model model,HttpServletRequest request, Map<String,Object> map) {
+    public String Linked_list(HttpServletRequest request, Map<String,Object> map) {
         String headvalue  = null;
         String datavalue  = null;
         String titlevalue = null;
@@ -338,12 +334,12 @@ public class systemController {
             allMembers.put("index-" + x, vo);
         }
         map.put("msg_Linked_list",Display_Title[tmp-1]);
-        model.addAttribute("allDatas", allMembers);
-//        System.out.println(model.addAttribute("title_main", title_main));
+        map.put("allDatas", allMembers);
+//        System.out.println(map.put("title_main", title_main));
         return "main_tab";
     }
     @RequestMapping("/Queue")
-    public String Queue(Model model,HttpServletRequest request, Map<String,Object> map) {
+    public String Queue(HttpServletRequest request, Map<String,Object> map) {
         String headvalue  = null;
         String datavalue  = null;
         String titlevalue = null;
@@ -387,12 +383,12 @@ public class systemController {
             allMembers.put("index-" + x, vo);
         }
         map.put("msg_Queue",Display_Title[tmp-1]);
-        model.addAttribute("allDatas", allMembers);
-//        System.out.println(model.addAttribute("title_main", title_main));
+        map.put("allDatas", allMembers);
+//        System.out.println(map.put("title_main", title_main));
         return "main_tab";
     }
     @RequestMapping("/Stack")
-    public String Stack(Model model,HttpServletRequest request, Map<String,Object> map) {
+    public String Stack(HttpServletRequest request, Map<String,Object> map) {
         String headvalue  = null;
         String datavalue  = null;
         String titlevalue = null;
@@ -436,12 +432,12 @@ public class systemController {
             allMembers.put("index-" + x, vo);
         }
         map.put("msg_Stack",Display_Title[tmp-1]);
-        model.addAttribute("allDatas", allMembers);
-//        System.out.println(model.addAttribute("title_main", title_main));
+        map.put("allDatas", allMembers);
+//        System.out.println(map.put("title_main", title_main));
         return "main_tab";
     }
     @RequestMapping("/Other")
-    public String Other(Model model,HttpServletRequest request, Map<String,Object> map) {
+    public String Other(HttpServletRequest request, Map<String,Object> map) {
         String headvalue  = null;
         String datavalue  = null;
         String titlevalue = null;
@@ -485,8 +481,8 @@ public class systemController {
             allMembers.put("index-" + x, vo);
         }
         map.put("msg_Other",Display_Title[tmp-1]);
-        model.addAttribute("allDatas", allMembers);
-//        System.out.println(model.addAttribute("title_main", title_main));
+        map.put("allDatas", allMembers);
+//        System.out.println(map.put("title_main", title_main));
         return "main_tab";
     }
 

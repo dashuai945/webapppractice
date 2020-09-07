@@ -14,9 +14,7 @@ import java.util.Map;
 @Controller  //用于定义控制器类，在spring项目中由控制器负责将用户发来的URL请求转发到对应的服务接口（service层），
             // 一般这个注解在类中，通常方法需要配合注解   //对htm页面的控制或者开发
 public class registerController {
-    @Autowired      //自动导入依赖的bean 自动导入依赖的bean。byType方式。把配置好的Bean拿来用，完成属性、方法的组装，
-                    // 它可以对类成员变量、方法及构造函数进行标注，完成自动装配的工作。
-                 //接口实例化；将 usermapper的数据导入进来
+    @Autowired      //接口实例化；将 usermapper的数据导入进来
     private UserMapper userMapper;
 
     @GetMapping("/register")             //指定路径  //做一种请求映射的，映射输入的地址，8081/register
